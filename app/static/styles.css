@@ -1,1 +1,74 @@
-body { font-family: Arial, sans-serif; background-color: #f9f9f9; }
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .logo {
+    font-weight: bold;
+    border: 1px solid #333;
+    padding: 0.5rem 1rem;
+  }
+  
+  .search-box input {
+    padding: 0.5rem;
+    width: 250px;
+    border: 1px solid #333;
+  }
+  
+  .actions a {
+    text-decoration: none;
+    color: #000;
+    margin-left: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    padding: 1rem 0;
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+  }
+  
+  .hero {
+    background: #ddd;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .products {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 1rem;
+  }
