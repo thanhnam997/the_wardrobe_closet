@@ -1,6 +1,6 @@
 from app import create_app, db
 from app.models import Category, Product
-
+from app.models import Order
 app = create_app()
 
 with app.app_context():
@@ -34,3 +34,9 @@ with app.app_context():
     db.session.commit()
 
     print("✅ Products added successfully!")
+
+    order1 = Order(user_id=1, total=89.99, status="Delivered")
+order2 = Order(user_id=1, total=45.50, status="Processing")
+
+db.session.add_all([order1, order2])
+db.session.commit()
