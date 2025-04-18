@@ -5,6 +5,7 @@ from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
+
 bp = Blueprint('main', __name__)
 
 @bp.route('/signup', methods=['GET', 'POST'])
@@ -87,4 +88,8 @@ def edit_profile():
         return redirect(url_for('main.profile'))
 
     return render_template('edit_profile.html', user=current_user)
+
+@bp.route('/women')
+def women():
+    return render_template('women.html')
 
