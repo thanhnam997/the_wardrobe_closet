@@ -6,7 +6,13 @@
  <title>The Wardrobe Closet</title>
  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
+
 <body>
+  <section class="homepage_image">
+    <img src="{{ url_for('static', filename='homepage_banner.png') }}" alt="Hero Banner" />
+  </section>
+
+
  <header>
    <div class="logo">The Wardrobe Closet</div>
    <div class="search-box">
@@ -25,28 +31,24 @@
 
 
  <nav class="nav-links">
+  <a href="{{ url_for('main.index') }}">Home</a>
    <a href="#">Men</a>
    <a href="{{ url_for('main.women') }}">Women</a>
    <a href="#">Accessories</a>
  </nav>
 
-
- <section class="hero-image">
-   <img src="{{ url_for('static', filename='hero1.jpg') }}" alt="Hero Banner" />
- </section>
-
-
  <div class="arrivals-section">
-   <h2 class="section-title">Popular or New Arrivals</h2>
-   <div class="products">
-     ...
-   </div>
+   <h2 class="section-title">ABOUT US</h2>
+   <p>At <strong>The Wardrobe Closet</strong> , we create timeless, comfortable styles for both men and women. From everyday essentials to standout pieces, our collections are designed to fit your lifestyle and express your individuality.
+
+    We believe fashion should be effortless, inclusive, and uniquely you.</p>
+    <p>We don’t just follow trends — we help you create a style that’s truly your own.</p>
  </div>
 
 
  <footer>
    <div>
-     <h4>The Wardrobe Closet</h4>
+     
      <p><strong>Address:</strong><br/>123 AAA  Street, Minneapolis<br/>Minnesota , USA</p>
      <div class="socials">
        <a href="#">Instagram</a>

@@ -1,8 +1,20 @@
 {% extends "base.html" %}
-
 {% block content %}
-  <h2>Women's Collection</h2>
-  <p>Welcome to the women’s fashion page!</p>
+
+<div class="category-section">
+  <ul class="category-list">
+    <li><a href="/women/dresses">Dresses</a></li>
+    <li><a href="/women/tops">Tops & T-Shirts</a></li>
+    <li><a href="/women/pants">Pants</a></li>
+    <li><a href="/women/shoes">Shoes</a></li>
+    <li><a href="/women/jackets">Jackets & Coats</a></li>
+  </ul>
+</div>
+
+<div class="women-banner">
+  <img src="{{ url_for('static', filename='women_banner1.png') }}" alt="Women's Fashion Banner" class="banner-img">
+  <div class="banner-overlay">
+    <a href="#categories" class="shop-btn">SHOP NOW</a>
+  </div>
+</div>
 {% endblock %}
-
-
