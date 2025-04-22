@@ -93,3 +93,10 @@ def edit_profile():
 def women():
     return render_template('women.html')
 
+@bp.route('/men')
+def men():
+    return render_template('men.html')
+
+@bp.route('/accessories')
+def accessories():
+    return render_template('accessories.html')

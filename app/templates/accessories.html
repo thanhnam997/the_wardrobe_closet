@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Accessories{% endblock %}
+
+{% block content %}
+
+<div class="category-section">
+  <ul class="category-list">
+    <li><a href="/accessories/hats">Hats</a></li>
+    <li><a href="/accessories/bags">Bags</a></li>
+    <li><a href="/accessories/watches">Watches</a></li>
+    <li><a href="/accessories/belts">Belts</a></li>
+    <li><a href="/accessories/jewelry">Jewelry</a></li>
+  </ul>
+</div>
+
+<div class="men-banner">
+  <img src="{{ url_for('static', filename='accessories-banner(2).jpg') }}" alt="Accessories Banner" class="banner-img">
+  <div class="banner-overlay">
+    <a href="#categories" class="shop-btn">SHOP NOW</a>
+  </div>
+</div>
+
+{% endblock %}

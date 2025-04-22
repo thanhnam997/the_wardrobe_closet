@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Men's Clothing{% endblock %}
+
+{% block content %}
+
+<div class="category-section">
+  <ul class="category-list">
+    <li><a href="/men/underwear-socks">Underwear & Socks</a></li>
+    <li><a href="/men/tops">Tops & T-Shirts</a></li>
+    <li><a href="/men/pants">Pants</a></li>
+    <li><a href="/men/shoes">Shoes</a></li>
+    <li><a href="/men/jackets">Jackets & Coats</a></li>
+  </ul>
+</div>
+
+<div class="men-banner">
+  <img src="{{ url_for('static', filename='men-banner.jpg') }}" alt="Men's Fashion Banner" class="banner-img">
+  <div class="banner-overlay">
+    <a href="#categories" class="shop-btn">SHOP NOW</a>
+  </div>
+</div>
+
+{% endblock %}
