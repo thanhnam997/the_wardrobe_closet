@@ -206,7 +206,12 @@
     background-color: #333;
   }
 
-
+  .accessories-banner {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
 
   
 
