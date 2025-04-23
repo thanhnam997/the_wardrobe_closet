@@ -1,10 +1,51 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="page-content">
-  <h1>Frequently Asked Questions</h1>
-  <ul>
-    <li><strong>How long does shipping take?</strong> 3–7 business days.</li>
-    <li><strong>Can I return items?</strong> Yes, within 30 days of purchase.</li>
-  </ul>
-</div>
-{% endblock %}
+<div class="faq-section">
+  <h2 class="section-title">Frequently Asked Questions</h2>
+
+  <div class="faq-item"> 
+    <h4>How long does shipping take?</h4>
+    <p>Standard shipping usually takes 3–7 business days depending on your location.</p>
+  </div>
+
+  <div class="faq-item"> 
+    <h4>Can I return items?</h4>
+    <p>Yes! You can return items within 30 days of purchase as long as they are unworn and in original condition.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>How can I track my order?</h4>
+    <p>You’ll receive a shipping confirmation email with tracking details once your package ships.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>Do you ship internationally?</h4>
+    <p>Yes, we ship worldwide. Shipping fees and delivery times vary by destination.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>What sizes do you carry?</h4>
+    <p>We offer sizes XS to XXL. Please refer to our size guide for exact measurements.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>How do I apply a promo code?</h4>
+    <p>Enter your code in the “Promo Code” field at checkout before placing your order.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>Can I change or cancel my order?</h4>
+    <p>If your order hasn't shipped yet, please contact customer support as soon as possible.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>Do you offer gift cards?</h4>
+    <p>Yes! We offer digital gift cards in various amounts, sent instantly by email.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>How can I contact customer service?</h4>
+    <p>Reach out via <a href="{{ url_for('main.email_support') }}">Email Support</a>, <a href="{{ url_for('main.live_chat') }}">Live Chat</a>, or call us directly at (123) 456-7890.</p>
+  </div>
+  {% endblock %}
+

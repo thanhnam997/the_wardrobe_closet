@@ -103,8 +103,7 @@
     background: transparent;
     position: relative;
     z-index: 2;
-  }
-  
+  } 
   
   .products {
     display: flex;

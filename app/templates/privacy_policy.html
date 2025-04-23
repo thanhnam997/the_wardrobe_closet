@@ -1,7 +1,48 @@
 {% extends "base.html" %}
+
 {% block content %}
 <div class="page-content">
   <h1>Privacy Policy</h1>
-  <p>We take your privacy seriously. Read how we protect and use your personal data here...</p>
+
+  <p>At The Wardrobe Closet, we value your privacy and are committed to protecting your personal information. This policy outlines how we collect, use, and protect the information you share with us.</p>
+
+  <h3>Information We Collect</h3>
+  <p>We may collect the following information when you interact with our website:</p>
+  <ul>
+    <li>Your name, email address, and contact details when you create an account or place an order</li>
+    <li>Shipping and billing addresses</li>
+    <li>Payment information (processed securely through third-party services)</li>
+    <li>Browsing behavior, device type, and IP address (collected automatically for analytics and site performance)</li>
+  </ul>
+
+  <h3>How We Use Your Information</h3>
+  <p>Your information helps us to:</p>
+  <ul>
+    <li>Process and fulfill your orders</li>
+    <li>Provide customer support</li>
+    <li>Send order confirmations, shipping updates, or promotional emails (only if you opt in)</li>
+    <li>Improve our website, services, and user experience</li>
+  </ul>
+
+  <h3>Data Protection</h3>
+  <p>We implement appropriate security measures to protect your data from unauthorized access, disclosure, or misuse. Your payment information is processed securely and never stored on our servers.</p>
+
+  <h3>Sharing Your Information</h3>
+  <p>We do not sell or rent your personal information to third parties. We may share it with trusted partners like shipping companies or payment processors, but only as necessary to fulfill your order.</p>
+
+  <h3>Your Choices</h3>
+  <p>You can update or delete your account information at any time. You can also unsubscribe from our marketing emails by clicking the link at the bottom of any promotional email.</p>
+
+  <h3>Cookies</h3>
+  <p>We use cookies to personalize your shopping experience and analyze website traffic. You can choose to disable cookies in your browser settings if you prefer.</p>
+
+  <h3>Changes to This Policy</h3>
+  <p>We may update this policy occasionally to reflect changes in our practices or legal requirements. Any updates will be posted here with the revised date.</p>
+
+  <p>By using our website, you agree to the terms of this Privacy Policy.</p>
+
+  <p>If you have any questions, feel free to <a href="{{ url_for('main.email_support') }}">contact us</a>.</p>
+
+  <p style="margin-top: 40px; font-weight: bold;">Last updated: April 2025</p>
 </div>
 {% endblock %}
