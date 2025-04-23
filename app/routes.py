@@ -128,7 +128,11 @@ def men_shoes():
     products = Product.query.filter_by(category_id=men_category.id, subcategory='shoes').all()
     return render_template('men/men_shoes.html',products=products)
 
-
+@bp.route('/men/underwear&shock')
+def men_underwearshock():
+    men_category = Category.query.filter_by(name='Men').first()
+    products = Product.query.filter_by(category_id=men_category.id, subcategory='underwear&shock').all()
+    return render_template('men/men_underwear&shock.html', products=products)
 
 
 

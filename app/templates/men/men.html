@@ -6,7 +6,7 @@
 
 <div class="category-section">
   <ul class="category-list">
-    <li><a href="/men/underwear-socks">Underwear & Socks</a></li>
+    <li><a href="{{ url_for('main.men_underwearshock') }}">Underwear & Socks</a></li>
     <li><a href="{{ url_for('main.men_tops') }}">Tops & T-Shirts</a></li>
     <li><a href="{{ url_for('main.men_pants') }}">Pants</a></li>
     <li><a href="{{ url_for('main.men_shoes') }}">Shoes</a></li>
@@ -18,7 +18,7 @@
   <img src="{{ url_for('static', filename='men-banner.jpg') }}" alt="Men's Fashion Banner" class="banner-img">
 </div>
 
-<h2 style="margin-top: 2rem;">Tops & T-Shirts</h2>
+
 
 <div class="product-grid">
   {% for product in products %}
