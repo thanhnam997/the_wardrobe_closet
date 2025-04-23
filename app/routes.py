@@ -116,8 +116,17 @@ def men_tops():
     products = Product.query.filter_by(category_id=men_category.id, subcategory='tops').all()
     return render_template('men/men_tops.html', products=products)
 
+@bp.route('/men/Pants')
+def men_pants():
+    men_category = Category.query.filter_by(name='Men').first()
+    products = Product.query.filter_by(category_id=men_category.id, subcategory='pants').all()
+    return render_template('men/men_pants.html', products=products)
 
-
+@bp.route('/men/Shoes')
+def men_shoes():
+    men_category = Category.query.filter_by(name='Men').first()
+    products = Product.query.filter_by(category_id=men_category.id, subcategory='shoes').all()
+    return render_template('men/men_shoes.html',products=products)
 
 
 
