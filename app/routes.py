@@ -127,3 +127,39 @@ def men_tops():
 @bp.route('/accessories')
 def accessories():
     return render_template('accessories.html')
+
+@bp.route('/our-story')
+def our_story():
+    return render_template('our_story.html')
+
+@bp.route('/privacy-policy')
+def privacy_policy():
+    return render_template('privacy_policy.html')
+
+@bp.route('/email-support')
+def email_support():
+    return render_template('email_support.html')
+
+@bp.route('/live-chat')
+def live_chat():
+    return render_template('live_chat.html')
+
+@bp.route('/call-us')
+def call_us():
+    return render_template('call_us.html')
+
+@bp.route('/order-history')
+def order_history():
+    return render_template('order_history.html')
+
+@bp.route('/faq')
+def faq():
+    return render_template('faq.html')
+
+@bp.route('/returns')
+def returns():
+    return render_template('returns.html')
+
+@bp.route('/shipping-info')
+def shipping_info():
+    return render_template('shipping_info.html')
