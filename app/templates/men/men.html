@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Men's Clothing{% endblock %}
+
+{% block content %}
+
+<div class="category-section">
+  <ul class="category-list">
+    <li><a href="/men/underwear-socks">Underwear & Socks</a></li>
+    <li><a href="{{ url_for('main.men_tops') }}">Tops & T-Shirts</a></li>
+    <li><a href="/men/pants">Pants</a></li>
+    <li><a href="/men/shoes">Shoes</a></li>
+    <li><a href="/men/jackets">Jackets & Coats</a></li>
+  </ul>
+</div>
+
+<div class="men-banner">
+  <img src="{{ url_for('static', filename='men-banner.jpg') }}" alt="Men's Fashion Banner" class="banner-img">
+</div>
+
+<h2 style="margin-top: 2rem;">Tops & T-Shirts</h2>
+
+<div class="product-grid">
+  {% for product in products %}
+    <div class="product-card">
+      <img src="{{ product.image_url }}" alt="{{ product.name }}">
+      <h4>{{ product.name }}</h4>
+      <p>${{ "%.2f"|format(product.price) }}</p>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
