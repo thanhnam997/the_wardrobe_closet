@@ -8,11 +8,7 @@
 </head>
 
 <body>
-  <section class="homepage_image">
-    <img src="{{ url_for('static', filename='homepage_banner.png') }}" alt="Hero Banner" />
-  </section>
-
-
+  
  <header>
    <div class="logo">The Wardrobe Closet</div>
    <div class="search-box">
@@ -29,7 +25,6 @@
    </div>
  </header>
 
-
  <nav class="nav-links">
   <a href="{{ url_for('main.index') }}">Home</a>
    <a href="{{ url_for('main.men') }}">Men</a>
@@ -37,47 +32,45 @@
    <a href="{{ url_for('main.accessories') }}">Accessories</a>
  </nav>
 
- <div class="arrivals-section">
-   <h2 class="section-title">ABOUT US</h2>
-   <p>At <strong>The Wardrobe Closet</strong> , we create timeless, comfortable styles for both men and women. From everyday essentials to standout pieces, our collections are designed to fit your lifestyle and express your individuality.
+ <section class="homepage_image">
+  <img src="{{ url_for('static', filename='homepage3.png') }}" alt="Hero Banner" />
+ </section>
 
-    We believe fashion should be effortless, inclusive, and uniquely you.</p>
-    <p>We don’t just follow trends — we help you create a style that’s truly your own.</p>
- </div>
+ <footer class="footer-simple">
+  <div class="footer-column">
+    <h4>About Us</h4>
+    <ul>
+      <li><a href="our_story.html">Our Story</a></li>
+      <li><a href="privacy_policy.html">Privacy Policy</a></li>
+    </ul>
+  </div>
 
+  <div class="footer-column">
+    <h4>Contact Us</h4>
+    <ul>
+      <li><a href="email_support.html">Email Support</a></li>
+      <li><a href="call_us.html">Call Us</a></li>
+    </ul>
+  </div>
 
- <footer>
-   <div>
-     
-     <p><strong>Address:</strong><br/>123 AAA  Street, Minneapolis<br/>Minnesota , USA</p>
-     <div class="socials">
-       <a href="#">Instagram</a>
-       <a href="#">Facebook</a>
-       <a href="#">Twitter</a>
-     </div>
-   </div>
-   <div>
-     <h4>Column one</h4>
-     <a href="#">Link one</a>
-     <a href="#">Link two</a>
-     <a href="#">Link three</a>
-     <a href="#">Link four</a>
-   </div>
-   <div>
-     <h4>Column two</h4>
-     <a href="#">Link five</a>
-     <a href="#">Link six</a>
-     <a href="#">Link seven</a>
-     <a href="#">Link eight</a>
-   </div>
-   <div>
-     <h4>Column three</h4>
-     <a href="#">Link nine</a>
-     <a href="#">Link ten</a>
-     <a href="#">Link eleven</a>
-     <a href="#">Link twelve</a>
-   </div>
- </footer>
+  <div class="footer-column">
+    <h4>My Account</h4>
+    <ul>
+      <li><a href="{{ url_for('main.login') }}">Login</a></li>
+      <li><a href="{{ url_for('main.signup') }}">Register</a></li>
+      <li><a href="order_history.html">Order History</a></li>
+    </ul>
+  </div>
+
+  <div class="footer-column">
+    <h4>Customer Service</h4>
+    <ul>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="return.html">Returns</a></li>
+      <li><a href="shipping_info.html">Shipping Info</a></li>
+    </ul>
+  </div>
+</footer>
 
 
  <div class="bottom-line">
