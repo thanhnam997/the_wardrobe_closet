@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required,current_user
-from .models import User
+from .models import User, Category, Product
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -93,9 +93,36 @@ def edit_profile():
 def women():
     return render_template('women.html')
 
+
+
+
+
+
+
+
+
+
+
+
+#men's products
 @bp.route('/men')
 def men():
-    return render_template('men.html')
+    return render_template('men/men.html')
+
+
+@bp.route('/men/tops')
+def men_tops():
+    men_category = Category.query.filter_by(name='Men').first()
+    products = Product.query.filter_by(category_id=men_category.id, subcategory='tops').all()
+    return render_template('men/men_tops.html', products=products)
+
+
+
+
+
+
+
+
 
 @bp.route('/accessories')
 def accessories():
