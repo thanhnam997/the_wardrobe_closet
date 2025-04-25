@@ -91,7 +91,7 @@ def edit_profile():
 
 @bp.route('/women')
 def women():
-    return render_template('women.html')
+    return render_template('women/women.html')
 
 
 
@@ -134,12 +134,75 @@ def men_underwearshock():
     products = Product.query.filter_by(category_id=men_category.id, subcategory='underwear&shock').all()
     return render_template('men/men_underwear&shock.html', products=products)
 
+@bp.route('/men/jackets')
+def men_jackets():
+    men_category = Category.query.filter_by(name='Men').first()
+    products = Product.query.filter_by(category_id=men_category.id, subcategory='jackets').all()
+    return render_template('men/men_jackets.html', products=products)
 
 
 
+
+
+
+#accessories
 @bp.route('/accessories')
 def accessories():
-    return render_template('accessories.html')
+    return render_template('accessories/accessories.html')
+
+@bp.route('/accessories/hats')
+def hats():
+    accessories_category = Category.query.filter_by(name='Accessories').first()
+    products = Product.query.filter_by(category_id= accessories_category.id, subcategory='hats').all()
+    return render_template('accessories/bags.html', products=products)
+   
+
+@bp.route('/accessories/bags')
+def bags():
+    accessories_category = Category.query.filter_by(name='Accessories').first()
+    products = Product.query.filter_by(category_id= accessories_category.id, subcategory='bags').all()
+    return render_template('accessories/bags.html', products=products)
+
+
+@bp.route('/accessories/watches')
+def watches():
+    accessories_category = Category.query.filter_by(name='Accessories').first()
+    products = Product.query.filter_by(category_id= accessories_category.id, subcategory='watches').all()
+    return render_template('accessories/bags.html', products=products)
+
+
+@bp.route('/accessories/belts')
+def belts():
+    accessories_category = Category.query.filter_by(name='Accessories').first()
+    products = Product.query.filter_by(category_id= accessories_category.id, subcategory='belts').all()
+    return render_template('accessories/bags.html', products=products)
+   
+
+@bp.route('/accessories/jewelry')
+def jewelry():
+    accessories_category = Category.query.filter_by(name='Accessories').first()
+    products = Product.query.filter_by(category_id= accessories_category.id, subcategory='jewelry').all()
+    return render_template('accessories/bags.html', products=products)
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @bp.route('/our-story')
 def our_story():

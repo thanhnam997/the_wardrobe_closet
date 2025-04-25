@@ -1,13 +1,16 @@
 {% extends "base.html" %}
 
-{% block title %}Men's Shoes{% endblock %}
+{% block title %}Men's Jackets{% endblock %}
 
 {% block content %}
-<h2 class="section-title">Shoes</h2>
+<h2 class="section-title">Jackets</h2>
 
 <div class="product-grid">
   {% for product in products %}
   <div class="product-card">
+  
+    
+    
     <img src="{{ url_for('static', filename=product.image_url) }}" alt="{{ product.name }}">
     <h3>{{ product.name }}</h3>
     <p>{{ product.description }}</p>
