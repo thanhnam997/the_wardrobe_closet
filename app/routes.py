@@ -154,7 +154,7 @@ def accessories():
 def hats():
     accessories_category = Category.query.filter_by(name='Accessories').first()
     products = Product.query.filter_by(category_id= accessories_category.id, subcategory='hats').all()
-    return render_template('accessories/bags.html', products=products)
+    return render_template('accessories/hats.html', products=products)
    
 
 @bp.route('/accessories/bags')
@@ -168,21 +168,21 @@ def bags():
 def watches():
     accessories_category = Category.query.filter_by(name='Accessories').first()
     products = Product.query.filter_by(category_id= accessories_category.id, subcategory='watches').all()
-    return render_template('accessories/bags.html', products=products)
+    return render_template('accessories/watches.html', products=products)
 
 
 @bp.route('/accessories/belts')
 def belts():
     accessories_category = Category.query.filter_by(name='Accessories').first()
     products = Product.query.filter_by(category_id= accessories_category.id, subcategory='belts').all()
-    return render_template('accessories/bags.html', products=products)
+    return render_template('accessories/belts.html', products=products)
    
 
 @bp.route('/accessories/jewelry')
 def jewelry():
     accessories_category = Category.query.filter_by(name='Accessories').first()
     products = Product.query.filter_by(category_id= accessories_category.id, subcategory='jewelry').all()
-    return render_template('accessories/bags.html', products=products)
+    return render_template('accessories/jewelry.html', products=products)
     
     
 
