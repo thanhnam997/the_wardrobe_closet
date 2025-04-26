@@ -242,11 +242,126 @@ with app.app_context():
     db.session.commit()
     print("✅ Hats added!")
 
+    belts = [
+    Product(
+        name="Classic Brown Leather Belt",
+        description="Traditional brown leather belt with sturdy buckle.",
+        price=34.99,
+        stock=10,
+        size="M",
+        color="Brown",
+        subcategory="belts",
+        image_url="accessories/belts/Classic Brown Leather Belt.jpg",
+        category_id=accessories.id
+    ),
+    Product(
+        name="Dark Brown Heritage Belt",
+        description="Premium leather with vintage finish.",
+        price=39.99,
+        stock=8,
+        size="L",
+        color="Dark Brown",
+        subcategory="belts",
+        image_url="accessories/belts/Dark Brown Heritage Belt.jpg",
+        category_id=accessories.id
+    ),
+    Product(
+        name="Black Patterned Belt",
+        description="Textured leather design with modern stitching.",
+        price=42.99,
+        stock=6,
+        size="M",
+        color="Black",
+        subcategory="belts",
+        image_url="accessories/belts/Black Patterned Belt.jpg",
+        category_id=accessories.id
+    ),
+ ]
+
+    db.session.add_all(belts)
+    db.session.commit()
+    print("✅ Belts added successfully!")
+
    
+    jewelry = [
+    Product(
+        name="Patriotic Flag Bracelet",
+        description="Silver bracelet with American flag charm.",
+        price=14.99,
+        stock=15,
+        size="One Size",
+        color="Silver/Red/Blue",
+        subcategory="jewelry",
+        image_url="accessories/jewelry/Flag Bracelet.jpg",
+        category_id=accessories.id
+    ),
+    Product(
+        name="Gold Heart Bracelet",
+        description="Elegant gold bracelet with a heart charm.",
+        price=24.99,
+        stock=12,
+        size="One Size",
+        color="Gold",
+        subcategory="jewelry",
+        image_url="accessories/jewelry/Heart Bracelet.jpg",
+        category_id=accessories.id
+    ),
+    Product(
+        name="Pearl Heart Earrings",
+        description="Classy pearl earrings with heart detail.",
+        price=29.99,
+        stock=10,
+        size="One Size",
+        color="White/Gold",
+        subcategory="jewelry",
+        image_url="accessories/jewelry/Pearl Heart Earrings.jpg",
+        category_id=accessories.id
+    )
+  ]
+    db.session.add_all(jewelry)
+    db.session.commit()
+    print("✅ Belts added successfully!")
    
-   
-   
-   
+    watches = [
+    Product(
+        name="Floral Stripe Apple Watch Band",
+        description="Stylish watch band with black & white stripes and floral pattern.",
+        price=29.99,
+        stock=10,
+        size="One Size",
+        color="Black/White/Floral",
+        subcategory="watches",
+        image_url="accessories/watches/Floral Stripe Apple Watch Band.jpg",
+        category_id=accessories.id
+    ),
+    Product(
+        name="Minimalist White Wristwatch",
+        description="Elegant white leather strap with rose gold accents.",
+        price=74.99,
+        stock=7,
+        size="One Size",
+        color="White/Rose Gold",
+        subcategory="watches",
+        image_url="accessories/watches/Minimalist White Wristwatch.jpg",
+        category_id=accessories.id
+    ),
+    Product(
+        name="Engraved Watch Box Set",
+        description="Watch gift box with engraved glass display cover.",
+        price=89.99,
+        stock=5,
+        size="Box Set",
+        color="Black",
+        subcategory="watches",
+        image_url="accessories/watches/Engraved Watch Box Set.jpg",
+        category_id=accessories.id
+    ),
+  ]
+
+    db.session.add_all(watches)
+    db.session.commit()
+    print("✅ Watches added successfully!")
+
    
   
   
