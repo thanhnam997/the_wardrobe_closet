@@ -89,17 +89,42 @@ def edit_profile():
 
     return render_template('edit_profile.html', user=current_user)
 
+
+
+#women's products
 @bp.route('/women')
 def women():
     return render_template('women/women.html')
 
+@bp.route('/women/dresses')
+def women_dresses():
+    women_category = Category.query.filter_by(name='Women').first()
+    products = Product.query.filter_by(category_id=women_category.id, subcategory='dresses').all()
+    return render_template('women/dresses.html', products=products)
 
+@bp.route('/women/jackets')
+def women_jackets():
+    women_category = Category.query.filter_by(name='Women').first()
+    products = Product.query.filter_by(category_id=women_category.id, subcategory='jackets').all()
+    return render_template('women/jackets.html', products=products)
 
+@bp.route('/women/pants')
+def women_pants():
+    women_category = Category.query.filter_by(name='Women').first()
+    products = Product.query.filter_by(category_id=women_category.id, subcategory='pants').all()
+    return render_template('women/pants.html', products=products)
 
+@bp.route('/women/shoes')
+def women_shoes():
+    women_category = Category.query.filter_by(name='Women').first()
+    products = Product.query.filter_by(category_id=women_category.id, subcategory='shoes').all()
+    return render_template('women/shoes.html', products=products)
 
-
-
-
+@bp.route('/women/tops')
+def women_tops():
+    women_category = Category.query.filter_by(name='Women').first()
+    products = Product.query.filter_by(category_id=women_category.id, subcategory='tops').all()
+    return render_template('women/tops.html', products=products)
 
 
 
