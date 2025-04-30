@@ -47,3 +47,11 @@ class OrderItem(db.Model):
 
     order = db.relationship('Order', backref='items')
     product = db.relationship('Product', backref='order_items')
+
+class CartItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+    quantity = db.Column(db.Integer, default=1)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    product = db.relationship('Product')
