@@ -254,37 +254,107 @@ def returns():
 def shipping_info():
     return render_template('shipping_info.html')
 
-
-
+#Cart
+#Cart for guest
 @bp.route('/cart')
-@login_required
 def view_cart():
-    cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
-    total = sum(item.product.price * item.quantity for item in cart_items)
+    cart_items = []
+    if 'user_id' in session:
+        user_id = session['user_id']
+        items = Cart.query.filter_by(user_id=user_id).all()
+        cart_items = [{
+            'id': item.id,  # ✅ include this for remove_from_cart
+            'name': item.product.name,
+            'price': item.product.price,
+            'quantity': item.quantity,
+            'image_url': item.product.image_url 
+        } for item in items]
+    else:
+        session_cart = session.get('cart', {})
+        for pid, qty in session_cart.items():
+            product = Product.query.get(int(pid))
+            if product:
+                cart_items.append({
+                    'id': product.id,  # ✅ include this for remove_from_cart
+                    'name': product.name,
+                    'price': product.price,
+                    'quantity': qty,
+                    'image_url': product.image_url 
+                })
+
+    total = sum(item['price'] * item['quantity'] for item in cart_items)
     return render_template('cart.html', cart_items=cart_items, total=total)
 
-@bp.route('/add-to-cart/<int:product_id>', methods=['POST'])
-@login_required
-def add_to_cart(product_id):
-    quantity = int(request.form.get('quantity', 1))
-    existing_item = CartItem.query.filter_by(user_id=current_user.id, product_id=product_id).first()
-    if existing_item:
-        existing_item.quantity += quantity
-    else:
-        new_item = CartItem(user_id=current_user.id, product_id=product_id, quantity=quantity)
-        db.session.add(new_item)
-    db.session.commit()
-    flash('Added to cart!')
-    return redirect(url_for('main.view_cart'))
-
 @bp.route('/remove-from-cart/<int:item_id>', methods=['POST'])
-@login_required
 def remove_from_cart(item_id):
-    item = CartItem.query.get_or_404(item_id)
-    if item.user_id != current_user.id:
-        flash('Unauthorized action.', 'error')
-        return redirect(url_for('main.view_cart'))
-    db.session.delete(item)
-    db.session.commit()
+    if 'user_id' in session:
+        # Logged-in user: remove from DB cart
+        cart_item = CartItem.query.get_or_404(item_id)
+        if cart_item.user_id != session['user_id']:
+            flash('Unauthorized action', 'error')
+            return redirect(url_for('main.view_cart'))
+        db.session.delete(cart_item)
+        db.session.commit()
+    else:
+        # Guest: remove from session cart
+        cart = session.get('cart', {})
+        if str(item_id) in cart:
+            del cart[str(item_id)]
+            session['cart'] = cart
+            session.modified = True
+
     flash('Item removed from cart.')
     return redirect(url_for('main.view_cart'))
+
+@bp.route('/add_to_cart/<int:product_id>', methods=['POST'])
+def add_to_cart(product_id):
+    product = Product.query.get_or_404(product_id)
+
+    if 'user_id' not in session:
+        cart = session.get('cart', {})
+        cart[str(product_id)] = cart.get(str(product_id), 0) + 1
+        session['cart'] = cart
+        session.modified = True
+    else:
+        user_id = session['user_id']
+        cart_item = CartItem.query.filter_by(user_id=user_id, product_id=product_id).first()
+        if cart_item:
+            cart_item.quantity += 1
+        else:
+            new_item = CartItem(user_id=user_id, product_id=product_id, quantity=1)
+            db.session.add(new_item)
+        db.session.commit()
+
+    flash("Item added to cart!")
+    return redirect(url_for('main.view_cart'))
+
+@bp.route('/payment', methods=['GET', 'POST'])
+def payment():
+    if request.method == 'POST':
+        if current_user.is_authenticated:
+            # 🟢 Logged-in user checkout
+            flash("Order placed successfully! (Logged-in user)")
+            # You can save order details in the DB here...
+        else:
+            # 🟡 Guest checkout
+            name = request.form.get('guest_name')
+            email = request.form.get('guest_email')
+            flash(f"Order placed for guest: {name} ({email})")
+            # Optionally: store guest order with limited info
+        
+        # Clear cart after order
+        if current_user.is_authenticated:
+            CartItem.query.filter_by(user_id=current_user.id).delete()
+            db.session.commit()
+        else:
+            session.pop('cart', None)
+        
+        return redirect(url_for('main.order_success'))
+
+
+    return render_template('payment.html')
+
+@bp.route('/order-success')
+def order_success():
+    return render_template('order_success.html')
+

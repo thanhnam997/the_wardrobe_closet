@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<h2 class="section-title">Checkout</h2>
+
+{% if current_user.is_authenticated %}
+  <p>Welcome back, {{ current_user.name }}!</p>
+  <form method="POST">
+    <button type="submit" class="checkout-button">Place Order</button>
+  </form>
+{% else %}
+  <form method="POST" class="guest-form">
+    <label for="guest_name">Name</label>
+    <input type="text" name="guest_name" required>
+
+    <label for="guest_email">Email</label>
+    <input type="email" name="guest_email" required>
+
+    <button type="submit" class="checkout-button">Checkout as Guest</button>
+  </form>
+{% endif %}
+{% endblock %}

@@ -16,7 +16,7 @@
     <p>{{ product.description }}</p>
     <p class="price">${{ "%.2f"|format(product.price) }}</p>
     <form action="{{ url_for('main.add_to_cart', product_id=product.id) }}" method="POST">
-      {{ csrf_token() }}
+   
       <input type="hidden" name="quantity" value="1">
       <button type="submit">Add to Cart</button>
     </form>
