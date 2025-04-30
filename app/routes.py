@@ -3,6 +3,8 @@ from flask_login import login_user, logout_user, login_required,current_user
 from .models import User, Category, Product
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask import session
+from app.models import CartItem
 
 
 
@@ -216,19 +218,6 @@ def jewelry():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 @bp.route('/our-story')
 def our_story():
     return render_template('our_story.html')
@@ -264,3 +253,38 @@ def returns():
 @bp.route('/shipping-info')
 def shipping_info():
     return render_template('shipping_info.html')
+
+
+
+@bp.route('/cart')
+@login_required
+def view_cart():
+    cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
+    total = sum(item.product.price * item.quantity for item in cart_items)
+    return render_template('cart.html', cart_items=cart_items, total=total)
+
+@bp.route('/add-to-cart/<int:product_id>', methods=['POST'])
+@login_required
+def add_to_cart(product_id):
+    quantity = int(request.form.get('quantity', 1))
+    existing_item = CartItem.query.filter_by(user_id=current_user.id, product_id=product_id).first()
+    if existing_item:
+        existing_item.quantity += quantity
+    else:
+        new_item = CartItem(user_id=current_user.id, product_id=product_id, quantity=quantity)
+        db.session.add(new_item)
+    db.session.commit()
+    flash('Added to cart!')
+    return redirect(url_for('main.view_cart'))
+
+@bp.route('/remove-from-cart/<int:item_id>', methods=['POST'])
+@login_required
+def remove_from_cart(item_id):
+    item = CartItem.query.get_or_404(item_id)
+    if item.user_id != current_user.id:
+        flash('Unauthorized action.', 'error')
+        return redirect(url_for('main.view_cart'))
+    db.session.delete(item)
+    db.session.commit()
+    flash('Item removed from cart.')
+    return redirect(url_for('main.view_cart'))
