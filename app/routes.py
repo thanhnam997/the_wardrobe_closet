@@ -4,7 +4,8 @@ from .models import User, Category, Product
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import session
-from app.models import CartItem
+from app.models import Order, OrderItem, CartItem, Product
+
 
 
 
@@ -67,8 +68,41 @@ def index():
 @bp.route('/profile')
 @login_required
 def profile():
-    user_orders = current_user.orders  # fetch related orders
-    return render_template('profile.html', user=current_user, orders=user_orders)
+    user_orders = current_user.orders
+    order_data = []
+
+    for order in user_orders:
+        items = OrderItem.query.filter_by(order_id=order.id).all()
+        products = [{
+            'name': item.product.name,
+            'image_url': item.product.image_url,
+            'quantity': item.quantity,
+            'price': item.price
+        } for item in items]
+
+        order_data.append({
+            'id': order.id,
+            'date': order.date,
+            'total': order.total,
+            'status': order.status,
+            'products': products
+        })
+
+    return render_template('profile.html', user=current_user, orders=order_data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @bp.route('/profile/edit', methods=['GET', 'POST'])
 @login_required
@@ -332,29 +366,71 @@ def add_to_cart(product_id):
 def payment():
     if request.method == 'POST':
         if current_user.is_authenticated:
-            # 🟢 Logged-in user checkout
-            flash("Order placed successfully! (Logged-in user)")
-            # You can save order details in the DB here...
+            # ✅ Fetch user's cart items
+            cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
+
+            # ✅ Calculate total
+            total = sum(item.quantity * item.product.price for item in cart_items)
+
+            # ✅ Create a new order
+            order = Order(user_id=current_user.id, status="Processing", total=total)
+            db.session.add(order)
+            db.session.commit()  # Save to generate order.id
+
+            # ✅ Create order items
+            for item in cart_items:
+                order_item = OrderItem(
+                    order_id=order.id,
+                    product_id=item.product.id,
+                    quantity=item.quantity,
+                    price=item.product.price
+                )
+                db.session.add(order_item)
+
+            db.session.commit()  # Save all order items
+
+            # ✅ Clear the user's cart
+            CartItem.query.filter_by(user_id=current_user.id).delete()
+            db.session.commit()
+
+            flash("Order placed successfully!")
         else:
-            # 🟡 Guest checkout
+            # Handle guest checkout (optional)
             name = request.form.get('guest_name')
             email = request.form.get('guest_email')
             flash(f"Order placed for guest: {name} ({email})")
-            # Optionally: store guest order with limited info
-        
-        # Clear cart after order
-        if current_user.is_authenticated:
-            CartItem.query.filter_by(user_id=current_user.id).delete()
-            db.session.commit()
-        else:
             session.pop('cart', None)
-        
+
         return redirect(url_for('main.order_success'))
 
-
     return render_template('payment.html')
+
 
 @bp.route('/order-success')
 def order_success():
     return render_template('order_success.html')
 
+@bp.route('/order-history-full')
+@login_required
+def order_history_full():
+    user_orders = current_user.orders
+    order_data = []
+
+    for order in user_orders:
+        items = OrderItem.query.filter_by(order_id=order.id).all()
+        products = [{
+            'name': item.product.name,
+            'image_url': item.product.image_url,
+            'quantity': item.quantity,
+            'price': item.price
+        } for item in items]
+
+        order_data.append({
+            'id': order.id,
+            'date': order.date,
+            'total': order.total,
+            'status': order.status,
+            'products': products
+        })
+
+    return render_template('order_history.html', orders=order_data)

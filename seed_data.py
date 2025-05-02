@@ -301,10 +301,4 @@ with app.app_context():
     print(f"✅ {len(all_women_products)} women's products added successfully!")
     print(f"✅ {len(all_accessories)} accessories added successfully!")
 
-       # Add sample orders
-    order1 = Order(user_id=1, status="Delivered")
-    order2 = Order(user_id=1, status="Processing")
-    db.session.add_all([order1, order2])
-    db.session.commit()
-    
-    print("✅ 2 orders added successfully!")
+

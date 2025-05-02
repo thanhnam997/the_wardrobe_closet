@@ -36,6 +36,8 @@ class Order(db.Model):
     status = db.Column(db.String(50), default="Processing")
     total = db.Column(db.Float, default=0.0)
     user = db.relationship('User', backref='orders')
+    date = db.Column(db.DateTime, default=datetime.utcnow)  
+
 
 # OrderItem model
 class OrderItem(db.Model):
