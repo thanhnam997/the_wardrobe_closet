@@ -24,23 +24,23 @@ Prerequisites
 
 Installation
 - Clone the repo
-git clone https://github.com/your_username/the_wardrobe_closet.git
-cd the_wardrobe_closet
+- git clone https://github.com/your_username/the_wardrobe_closet.git
+- cd the_wardrobe_closet
 
 Set up a virtual environment
-  python -m venv venv
-  source venv/bin/activate
+- python -m venv venv
+- source venv/bin/activate
 
 Install dependencies
-pip install -r requirements.txt
+- pip install -r requirements.txt
 
 Set up the database
-flask db init
-flask db migrate -m "Initial migration"
-flask db upgrade
+- flask db init
+- flask db migrate -m "Initial migration"
+- flask db upgrade
 
 Run the app
-python run.py 
+- python run.py 
 
 Usage
 - View products by category: /men, /women, /accessories
