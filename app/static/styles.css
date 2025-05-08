@@ -458,6 +458,42 @@ button:hover {
   border-radius: 5px;
 }
 
+.search-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.search-box input[type="text"] {
+  padding: 10px 15px;
+  border: 2px solid #ffb6c1;
+  border-radius: 25px 0 0 25px;
+  outline: none;
+  font-size: 14px;
+  width: 200px;
+  transition: 0.3s ease;
+  background-color: #fff0f5;
+}
+
+.search-box input[type="text"]::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.search-box button {
+  padding: 10px 15px;
+  background-color:rgb(255, 105, 105);
+  color: white;
+  border: 2px solidrgb(255, 105, 105);
+  border-radius: 0 25px 25px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-box button:hover {
+  background-color:rgb(255, 20, 20);
+}
 
 
  
