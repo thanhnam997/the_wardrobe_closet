@@ -435,3 +435,12 @@ def order_history_full():
 
     return render_template('order_history.html', orders=order_data)
 
+#searching bar
+@bp.route('/search')
+def search():
+    query = request.args.get('q')
+    if query:
+        products = Product.query.filter(Product.name.ilike(f"%{query}%")).all()
+    else:
+        products = []
+    return render_template('search_results.html', query=query, products=products)
