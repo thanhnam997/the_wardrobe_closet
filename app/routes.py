@@ -5,7 +5,7 @@ from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import session
 from app.models import Order, OrderItem, CartItem, Product
-
+from flask import request
 
 
 
@@ -290,56 +290,6 @@ def shipping_info():
 
 #Cart
 #Cart for guest
-@bp.route('/cart')
-def view_cart():
-    cart_items = []
-    if 'user_id' in session:
-        user_id = session['user_id']
-        items = Cart.query.filter_by(user_id=user_id).all()
-        cart_items = [{
-            'id': item.id,  # ✅ include this for remove_from_cart
-            'name': item.product.name,
-            'price': item.product.price,
-            'quantity': item.quantity,
-            'image_url': item.product.image_url 
-        } for item in items]
-    else:
-        session_cart = session.get('cart', {})
-        for pid, qty in session_cart.items():
-            product = Product.query.get(int(pid))
-            if product:
-                cart_items.append({
-                    'id': product.id,  # ✅ include this for remove_from_cart
-                    'name': product.name,
-                    'price': product.price,
-                    'quantity': qty,
-                    'image_url': product.image_url 
-                })
-
-    total = sum(item['price'] * item['quantity'] for item in cart_items)
-    return render_template('cart.html', cart_items=cart_items, total=total)
-
-@bp.route('/remove-from-cart/<int:item_id>', methods=['POST'])
-def remove_from_cart(item_id):
-    if 'user_id' in session:
-        # Logged-in user: remove from DB cart
-        cart_item = CartItem.query.get_or_404(item_id)
-        if cart_item.user_id != session['user_id']:
-            flash('Unauthorized action', 'error')
-            return redirect(url_for('main.view_cart'))
-        db.session.delete(cart_item)
-        db.session.commit()
-    else:
-        # Guest: remove from session cart
-        cart = session.get('cart', {})
-        if str(item_id) in cart:
-            del cart[str(item_id)]
-            session['cart'] = cart
-            session.modified = True
-
-    flash('Item removed from cart.')
-    return redirect(url_for('main.view_cart'))
-
 @bp.route('/add_to_cart/<int:product_id>', methods=['POST'])
 def add_to_cart(product_id):
     product = Product.query.get_or_404(product_id)
@@ -360,6 +310,56 @@ def add_to_cart(product_id):
         db.session.commit()
 
     flash("Item added to cart!")
+    return redirect(request.referrer or url_for('main.index'))
+
+
+@bp.route('/cart')
+def view_cart():
+    cart_items = []
+    if 'user_id' in session:
+        user_id = session['user_id']
+        items = CartItem.query.filter_by(user_id=user_id).all()
+        cart_items = [{
+            'id': item.id,
+            'name': item.product.name,
+            'price': item.product.price,
+            'quantity': item.quantity,
+            'image_url': item.product.image_url
+        } for item in items]
+    else:
+        session_cart = session.get('cart', {})
+        for pid, qty in session_cart.items():
+            product = Product.query.get(int(pid))
+            if product:
+                cart_items.append({
+                    'id': product.id,
+                    'name': product.name,
+                    'price': product.price,
+                    'quantity': qty,
+                    'image_url': product.image_url
+                })
+
+    total = sum(item['price'] * item['quantity'] for item in cart_items)
+    return render_template('cart.html', cart_items=cart_items, total=total)
+
+
+@bp.route('/remove-from-cart/<int:item_id>', methods=['POST'])
+def remove_from_cart(item_id):
+    if 'user_id' in session:
+        cart_item = CartItem.query.get_or_404(item_id)
+        if cart_item.user_id != session['user_id']:
+            flash('Unauthorized action', 'error')
+            return redirect(url_for('main.view_cart'))
+        db.session.delete(cart_item)
+        db.session.commit()
+    else:
+        cart = session.get('cart', {})
+        if str(item_id) in cart:
+            del cart[str(item_id)]
+            session['cart'] = cart
+            session.modified = True
+
+    flash('Item removed from cart.')
     return redirect(url_for('main.view_cart'))
 
 @bp.route('/payment', methods=['GET', 'POST'])
