@@ -1,6 +1,8 @@
 from app import create_app, db
 from app.models import Category, Product, Order
 
+def seed_all():
+    print("✅ Seeding all data...")
 # Create the Flask app instance
 app = create_app()
 
@@ -301,4 +303,5 @@ with app.app_context():
     print(f"✅ {len(all_women_products)} women's products added successfully!")
     print(f"✅ {len(all_accessories)} accessories added successfully!")
 
-
+if __name__ == '__main__':
+    seed_all()
