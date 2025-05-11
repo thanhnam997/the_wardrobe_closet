@@ -7,7 +7,12 @@
 </head>
 <body>
   <header>
-    <div class="logo">The Wardrobe Closet</div>
+    <div class="logo">
+  <a href="{{ url_for('main.index') }}" style="text-decoration: none; color: inherit;">
+    <strong>The Wardrobe Closet</strong>
+  </a>
+</div>
+
     <div class="search-box">
       <form action="{{ url_for('main.search') }}" method="get">
     <input type="text" name="q" placeholder="Search products...">
